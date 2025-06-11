@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RadiantGlow | Clinically-Backed Marine Collagen</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Open+Sans&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#E9F3FC',
+                        secondary: '#FFFFFF',
+                        accent: '#0073B1',
+                        highlight: '#00A4DB',
+                        textPrimary: '#333333',
+                        textSecondary: '#666666',
+                    },
+                    fontFamily: {
+                        heading: ['Montserrat', 'sans-serif'],
+                        body: ['Open Sans', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        .hero-image {
+            background-image: linear-gradient(rgba(0, 115, 177, 0.2), rgba(0, 115, 177, 0.2)), url('https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        .testimonial-carousel {
+            scroll-snap-type: x mandatory;
+        }
+        .testimonial-slide {
+            scroll-snap-align: start;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .accordion-content.active {
+            max-height: 500px;
+            transition: max-height 0.5s ease-in;
+        }
+        .rotate-180 {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="font-body text-textPrimary bg-primary">
+    <!-- Header & Navigation -->
+    <header class="sticky top-0 z-50 bg-secondary shadow-sm">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <a href="#" class="text-2xl font-heading font-bold text-accent">RadiantGlow</a>
+            </div>
+            
+            <nav class="hidden md:flex space-x-8">
+                <a href="#" class="font-heading uppercase hover:text-accent transition">Home</a>
+                <a href="#benefits" class="font-heading uppercase hover:text-accent transition">Benefits</a>
+                <a href="#science" class="font-heading uppercase hover:text-accent transition">Science</a>
+                <a href="#shop" class="font-heading uppercase hover:text-accent transition">Shop</a>
+                <a href="#about" class="font-heading uppercase hover:text-accent transition">About</a>
+                <a href="#blog" class="font-heading uppercase hover:text-accent transition">Blog</a>
+            </nav>
+            
+            <div class="hidden md:block">
+                <a href="#shop" class="bg-accent hover:bg-highlight text-white px-6 py-2 rounded-full font-heading uppercase transition">Buy Now</a>
+            </div>
+            
+            <button id="mobile-menu-button" class="md:hidden text-accent">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-secondary shadow-lg">
+            <div class="container mx-auto px-4 py-3 flex flex-col space-y-4">
+                <a href="#" class="font-heading uppercase hover:text-accent transition">Home</a>
+                <a href="#benefits" class="font-heading uppercase hover:text-accent transition">Benefits</a>
+                <a href="#science" class="font-heading uppercase hover:text-accent transition">Science</a>
+                <a href="#shop" class="font-heading uppercase hover:text-accent transition">Shop</a>
+                <a href="#about" class="font-heading uppercase hover:text-accent transition">About</a>
+                <a href="#blog" class="font-heading uppercase hover:text-accent transition">Blog</a>
+                <a href="#shop" class="bg-accent hover:bg-highlight text-white px-6 py-2 rounded-full font-heading uppercase text-center transition">Buy Now</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-image min-h-[80vh] flex items-center relative">
+        <div class="container mx-auto px-4 py-20 text-center md:text-left">
+            <div class="max-w-2xl bg-white bg-opacity-90 p-8 rounded-lg md:ml-10">
+                <h1 class="text-3xl md:text-5xl font-heading uppercase font-bold mb-4">Reclaim Your Youthful Glow from Within</h1>
+                <p class="text-lg md:text-xl mb-8">Clinically-backed marine collagen with hyaluronic acid & vitamin C</p>
+                <a href="#shop" class="bg-accent hover:bg-highlight text-white px-8 py-3 rounded-full font-heading uppercase transition inline-block">Start Your Transformation</a>
+            </div>
+        </div>
+        
+        <!-- Social Proof Ticker -->
+        <div class="absolute bottom-0 left-0 right-0 bg-accent text-white py-2 overflow-hidden">
+            <div class="flex items-center justify-center space-x-8 animate-marquee whitespace-nowrap">
+                <span>4.8★ from 2,300+ women aged 40–65</span>
+                <span>"My skin has never looked better!" - Susan, 52</span>
+                <span>Doctor recommended formula</span>
+                <span>Visible results in just 4 weeks</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Awareness -->
+    <section class="py-16 bg-secondary">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10">
+                    <div class="bg-primary p-6 rounded-lg">
+                        <h2 class="font-heading uppercase text-2xl mb-4">Why Collagen Declines After 40</h2>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="bg-accent text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 mt-1">1</div>
+                                <div>
+                                    <h3 class="font-bold">Age 25-30</h3>
+                                    <p class="text-sm text-textSecondary">Collagen production begins to slow by 1% each year</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-accent text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 mt-1">2</div>
+                                <div>
+                                    <h3 class="font-bold">Age 35-40</h3>
+                                    <p class="text-sm text-textSecondary">Noticeable changes in skin elasticity and joint comfort</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-accent text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 mt-1">3</div>
+                                <div>
+                                    <h3 class="font-bold">Age 40+</h3>
+                                    <p class="text-sm text-textSecondary">Collagen levels drop by 30%, accelerating visible aging</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2">
+                    <h2 class="font-heading uppercase text-2xl md:text-3xl mb-4">Here's why you feel it, and how to stop it.</h2>
+                    <p class="mb-6">As we age, our body's natural collagen production declines, leading to wrinkles, joint stiffness, and thinning hair. Environmental factors and lifestyle choices can accelerate this process, leaving you feeling older than your years.</p>
+                    <p class="mb-8">RadiantGlow's scientifically formulated marine collagen peptides work with your body to replenish what time takes away, helping you maintain a youthful appearance and active lifestyle.</p>
+                    <a href="#science" class="text-accent hover:text-highlight font-bold flex items-center">
+                        See the Science
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Feature Spotlight -->
+    <section id="shop" class="py-16 bg-primary">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="font-heading uppercase text-3xl mb-4">Marine Collagen Complex</h2>
+                <p class="max-w-2xl mx-auto text-textSecondary">The most advanced anti-aging formula for women over 40</p>
+            </div>
+            
+            <div class="flex flex-col lg:flex-row items-center justify-center">
+                <div class="lg:w-1/2 mb-10 lg:mb-0 flex justify-center">
+                    <div class="relative w-64 h-64 md:w-80 md:h-80">
+                        <div class="absolute inset-0 bg-accent rounded-full opacity-20"></div>
+                        <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80" 
+                             alt="RadiantGlow Marine Collagen" 
+                             class="relative z-10 w-full h-full object-contain">
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2 lg:pl-12">
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start">
+                            <div class="bg-accent text-white rounded-full w-6 h-6 flex items-center justify-center mr-4 mt-1">
+                                <i class="fas fa-check text-xs"></i>
+                            </div>
+                            <span class="font-bold">Boost skin elasticity by up to 30% in 8 weeks<sup>1</sup></span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="bg-accent text-white rounded-full w-6 h-6 flex items-center justify-center mr-4 mt-1">
+                                <i class="fas fa-check text-xs"></i>
+                            </div>
+                            <span>Hydrate from the inside out with hyaluronic acid</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="bg-accent text-white rounded-full w-6 h-6 flex items-center justify-center mr-4 mt-1">
+                                <i class="fas fa-check text-xs"></i>
+                            </div>
+                            <span>Daily vitamin C for stronger, brighter complexion</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="bg-accent text-white rounded-full w-6 h-6 flex items-center justify-center mr-4 mt-1">
+                                <i class="fas fa-check text-xs"></i>
+                            </div>
+                            <span>Easy-to-mix, great-tasting powder</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="bg-accent text-white rounded-full w-6 h-6 flex items-center justify-center mr-4 mt-1">
+                                <i class="fas fa-check text-xs"></i>
+                            </div>
+                            <span>No artificial flavors, colors, or preservatives</span>
+                        </li>
+                    </ul>
+                    
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="#" class="bg-accent hover:bg-highlight text-white px-8 py-3 rounded-full font-heading uppercase text-center transition">Buy Single Jar ($59)</a>
+                        <a href="#" class="bg-highlight hover:bg-accent text-white px-8 py-3 rounded-full font-heading uppercase text-center transition">Subscribe & Save 15%</a>
+                    </div>
+                    
+                    <p class="text-sm text-textSecondary mt-4"><sup>1</sup>Based on clinical studies of similar marine collagen formulations</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Science & Ingredients -->
+    <section id="science" class="py-16 bg-secondary">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="font-heading uppercase text-3xl mb-4">The Science Behind RadiantGlow</h2>
+                <p class="max-w-2xl mx-auto text-textSecondary">Clinically-proven ingredients working in synergy</p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <!-- Tabs Navigation -->
+                <div class="flex flex-wrap border-b border-gray-200 mb-8">
+                    <button class="tab-btn active px-6 py-3 font-heading uppercase text-accent border-b-2 border-accent" data-tab="collagen">
+                        Marine Collagen
+                    </button>
+                    <button class="tab-btn px-6 py-3 font-heading uppercase text-textSecondary hover:text-accent" data-tab="hyaluronic">
+                        Hyaluronic Acid
+                    </button>
+                    <button class="tab-btn px-6 py-3 font-heading uppercase text-textSecondary hover:text-accent" data-tab="vitamin">
+                        Vitamin C
+                    </button>
+                </div>
+                
+                <!-- Tab Contents -->
+                <div id="collagen" class="tab-content active">
+                    <div class="flex flex-col md:flex-row">
+                        <div class="md:w-1/3 mb-6 md:mb-0 flex justify-center">
+                            <div class="bg-primary rounded-full w-40 h-40 flex items-center justify-center">
+                                <i class="fas fa-atom text-6xl text-accent"></i>
+                            </div>
+                        </div>
+                        <div class="md:w-2/3 md:pl-8">
+                            <h3 class="font-heading uppercase text-xl mb-4">Marine Collagen Peptides (Type I & III)</h3>
+                            <p class="mb-4">Our premium marine collagen is sourced from wild-caught fish, providing the most bioavailable form of collagen peptides. These small molecules are easily absorbed by your body to support skin, hair, nails, and joint health.</p>
+                            <div class="bg-primary p-4 rounded-lg">
+                                <p class="italic mb-2">"Oral collagen improved skin hydration in women 40–60, Int. J. Dermatol., 2023."</p>
+                                <p class="text-sm text-textSecondary">Clinical studies show marine collagen supplementation can increase skin elasticity by up to 30% and reduce wrinkle depth by 20% in 8-12 weeks.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="hyaluronic" class="tab-content">
+                    <div class="flex flex-col md:flex-row">
+                        <div class="md:w-1/3 mb-6 md:mb-0 flex justify-center">
+                            <div class="bg-primary rounded-full w-40 h-40 flex items-center justify-center">
+                                <i class="fas fa-tint text-6xl text-accent"></i>
+                            </div>
+                        </div>
+                        <div class="md:w-2/3 md:pl-8">
+                            <h3 class="font-heading uppercase text-xl mb-4">Hyaluronic Acid</h3>
+                            <p class="mb-4">Our formula includes clinically effective doses of hyaluronic acid, a powerful humectant that attracts and retains moisture in the skin. This works synergistically with collagen to plump skin and reduce the appearance of fine lines.</p>
+                            <div class="bg-primary p-4 rounded-lg">
+                                <p class="italic mb-2">"Hyaluronic acid supplementation significantly improved skin hydration and elasticity in mature skin, J. Clin. Aesthet. Dermatol., 2022."</p>
+                                <p class="text-sm text-textSecondary">Research indicates oral hyaluronic acid can increase skin moisture by 24% and improve overall skin condition in as little as 4 weeks.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="vitamin" class="tab-content">
+                    <div class="flex flex-col md:flex-row">
+                        <div class="md:w-1/3 mb-6 md:mb-0 flex justify-center">
+                            <div class="bg-primary rounded-full w-40 h-40 flex items-center justify-center">
+                                <i class="fas fa-sun text-6xl text-accent"></i>
+                            </div>
+                        </div>
+                        <div class="md:w-2/3 md:pl-8">
+                            <h3 class="font-heading uppercase text-xl mb-4">Vitamin C</h3>
+                            <p class="mb-4">Vitamin C is essential for collagen synthesis and acts as a powerful antioxidant to protect skin from environmental damage. Our formula includes a clinically effective dose to maximize collagen production and brighten skin tone.</p>
+                            <div class="bg-primary p-4 rounded-lg">
+                                <p class="italic mb-2">"Vitamin C enhances collagen production and protects against UV-induced damage, Nutrients, 2021."</p>
+                                <p class="text-sm text-textSecondary">Studies demonstrate that vitamin C supplementation can improve skin texture, reduce hyperpigmentation, and enhance the effectiveness of collagen supplementation.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Grid -->
+    <section id="benefits" class="py-16 bg-primary">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="font-heading uppercase text-3xl mb-4">Transformative Benefits</h2>
+                <p class="max-w-2xl mx-auto text-textSecondary">Experience the RadiantGlow difference</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-secondary p-8 rounded-lg text-center">
+                    <div class="bg-accent text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-spa text-2xl"></i>
+                    </div>
+                    <h3 class="font-heading uppercase text-xl mb-3">Radiant Skin</h3>
+                    <p class="text-textSecondary">Improve skin elasticity, hydration, and firmness while reducing the appearance of fine lines and wrinkles for a more youthful complexion.</p>
+                </div>
+                
+                <div class="bg-secondary p-8 rounded-lg text-center">
+                    <div class="bg-accent text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-bone text-2xl"></i>
+                    </div>
+                    <h3 class="font-heading uppercase text-xl mb-3">Flexible Joints</h3>
+                    <p class="text-textSecondary">Support joint comfort and mobility by maintaining cartilage health and reducing inflammation associated with daily wear and tear.</p>
+                </div>
+                
+                <div class="bg-secondary p-8 rounded-lg text-center">
+                    <div class="bg-accent text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-cut text-2xl"></i>
+                    </div>
+                    <h3 class="font-heading uppercase text-xl mb-3">Stronger Hair & Nails</h3>
+                    <p class="text-textSecondary">Promote thicker, stronger hair growth and reduce nail brittleness by providing essential building blocks for keratin production.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Carousel -->
+    <section class="py-16 bg-secondary">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="font-heading uppercase text-3xl mb-4">Real Women, Real Results</h2>
+                <p class="max-w-2xl mx-auto text-textSecondary">Hear from women just like you</p>
+            </div>
+            
+            <div class="relative">
+                <div class="testimonial-carousel flex overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-8" id="testimonial-carousel">
+                    <div class="testimonial-slide flex-shrink-0 w-full md:w-1/2 px-4">
+                        <div class="bg-primary p-8 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80" 
+                                     alt="Susan K." 
+                                     class="w-16 h-16 rounded-full object-cover mr-4">
+                                <div>
+                                    <h4 class="font-bold">Susan K.</h4>
+                                    <div class="flex text-yellow-400">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="italic mb-4">"At 54, I was starting to feel invisible. After 3 months of RadiantGlow, my daughter said I looked 'refreshed' and my husband can't stop complimenting my skin. My joints feel better too!"</p>
+                            <p class="text-sm text-textSecondary">Results after 12 weeks of daily use</p>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-slide flex-shrink-0 w-full md:w-1/2 px-4">
+                        <div class="bg-primary p-8 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80" 
+                                     alt="Margaret T." 
+                                     class="w-16 h-16 rounded-full object-cover mr-4">
+                                <div>
+                                    <h4 class="font-bold">Margaret T.</h4>
+                                    <div class="flex text-yellow-400">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="italic mb-4">"I was skeptical but desperate. My knees ached every morning and my skin looked dull. Within 6 weeks, I noticed less stiffness and my skin had this glow I hadn't seen in years. I'm a believer!"</p>
+                            <p class="text-sm text-textSecondary">Results after 6 weeks of daily use</p>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-slide flex-shrink-0 w-full md:w-1/2 px-4">
+                        <div class="bg-primary p-8 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80" 
+                                     alt="Linda P." 
+                                     class="w-16 h-16 rounded-full object-cover mr-4">
+                                <div>
+                                    <h4 class="font-bold">Linda P.</h4>
+                                    <div class="flex text-yellow-400">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="italic mb-4">"My nails were always breaking and my hair was thinning. After 2 months on RadiantGlow, my manicurist commented on how strong my nails were, and I'm seeing new baby hairs! The vanilla flavor is delicious too."</p>
+                            <p class="text-sm text-textSecondary">Results after 8 weeks of daily use</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white rounded-full w-10 h-10 flex items-center justify-center shadow-md -ml-4 z-10" id="prev-testimonial">
+                    <i class="fas fa-chevron-left text-accent"></i>
+                </button>
+                <button class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white rounded-full w-10 h-10 flex items-center justify-center shadow-md -mr-4 z-10" id="next-testimonial">
+                    <i class="fas fa-chevron-right text-accent"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bundle & Upsell Teaser -->
+    <section class="py-16 bg-primary">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row bg-secondary rounded-lg overflow-hidden shadow-lg">
+                <div class="lg:w-1/2 p-8 md:p-12">
+                    <h2 class="font-heading uppercase text-2xl mb-4">Complete Wellness Pack</h2>
+                    <div class="flex mb-6">
+                        <div class="w-1/3 pr-2">
+                            <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80" 
+                                 alt="Marine Collagen" 
+                                 class="w-full rounded-lg border-2 border-accent">
+                        </div>
+                        <div class="w-1/3 px-1">
+                            <img src="https://images.unsplash.com/photo-1625579152913-7c1f26914bff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80" 
+                                 alt="Omega-3" 
+                                 class="w-full rounded-lg border-2 border-accent">
+                        </div>
+                        <div class="w-1/3 pl-2">
+                            <img src="https://images.unsplash.com/photo-1587854692152-e33df282cd8a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80" 
+                                 alt="Vitamin D3" 
+                                 class="w-full rounded-lg border-2 border-accent">
+                        </div>
+                    </div>
+                    <p class="mb-6">Our Complete Wellness Pack combines three essential supplements for women over 40:</p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-start">
+                            <div class="bg-accent text-white rounded-full w-5 h-5 flex items-center justify-center mr-3 mt-1">
+                                <i class="fas fa-check text-xs"></i>
+                            </div>
+                            <span>Marine Collagen Complex (30-day supply)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="bg-accent text-white rounded-full w-5 h-5 flex items-center justify-center mr-3 mt-1">
+                                <i class="fas fa-check text-xs"></i>
+                            </div>
+                            <span>Premium Omega-3 Fatty Acids (60 softgels)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="bg-accent text-white rounded-full w-5 h-5 flex items-center justify-center mr-3 mt-1">
+                                <i class="fas fa-check text-xs"></i>
+                            </div>
+                            <span>Vitamin D3 + K2 (60 capsules)</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="lg:w-1/2 bg-accent text-white p-8 md:p-12">
+                    <h2 class="font-heading uppercase text-2xl mb-4">Subscribe & Save</h2>
+                    <p class="mb-6">Join thousands of women who receive RadiantGlow automatically each month and enjoy these benefits:</p>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-start">
+                            <div class="bg-white text-accent rounded-full w-6 h-6 flex items-center justify-center mr-4 mt-1">
+                                <i class="fas fa-percentage"></i>
+                            </div>
+                            <span><strong>20% savings</strong> on every order</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="bg-white text-accent rounded-full w-6 h-6 flex items-center justify-center mr-4 mt-1">
+                                <i class="fas fa-shipping-fast"></i>
+                            </div>
+                            <span><strong>Free shipping</strong> on all subscription orders</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="bg-white text-accent rounded-full w-6 h-6 flex items-center justify-center mr-4 mt-1">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <span><strong>Flexible scheduling</strong> - change frequency or skip anytime</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="bg-white text-accent rounded-full w-6 h-6 flex items-center justify-center mr-4 mt-1">
+                                <i class="fas fa-gift"></i>
+                            </div>
+                            <span><strong>Exclusive gifts</strong> and samples with your first order</span>
+                        </li>
+                    </ul>
+                    
+                    <div class="bg-white bg-opacity-20 p-4 rounded-lg mb-6">
+                        <div class="flex justify-between items-center mb-2">
+                            <span>Regular Price:</span>
+                            <span class="line-through">$147</span>
+                        </div>
+                        <div class="flex justify-between items-center font-bold text-lg">
+                            <span>Your Price:</span>
+                            <span>$117.60 <span class="text-sm font-normal">(save $29.40)</span></span>
+                        </div>
+                    </div>
+                    
+                    <a href="#" class="bg-white hover:bg-primary text-accent px-8 py-3 rounded-full font-heading uppercase transition inline-block w-full text-center">Get the Pack</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="py-16 bg-secondary">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="font-heading uppercase text-3xl mb-4">Simple, Effective Routine</h2>
+                <p class="max-w-2xl mx-auto text-textSecondary">Just three easy steps to visible results</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <div class="text-center">
+                    <div class="bg-accent text-white rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4 text-3xl">
+                        1
+                    </div>
+                    <div class="bg-primary rounded-full w-32 h-32 flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-blender text-5xl text-accent"></i>
+                    </div>
+                    <h3 class="font-heading uppercase text-xl mb-3">Mix</h3>
+                    <p class="text-textSecondary">Add one scoop to water, coffee, or your favorite smoothie each morning.</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="bg-accent text-white rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4 text-3xl">
+                        2
+                    </div>
+                    <div class="bg-primary rounded-full w-32 h-32 flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-glass-whiskey text-5xl text-accent"></i>
+                    </div>
+                    <h3 class="font-heading uppercase text-xl mb-3">Enjoy</h3>
+                    <p class="text-textSecondary">Our great-tasting formula makes daily collagen intake something to look forward to.</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="bg-accent text-white rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4 text-3xl">
+                        3
+                    </div>
+                    <div class="bg-primary rounded-full w-32 h-32 flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-smile-beam text-5xl text-accent"></i>
+                    </div>
+                    <h3 class="font-heading uppercase text-xl mb-3">Transform</h3>
+                    <p class="text-textSecondary">See visible improvements in skin, hair, nails, and joint comfort in weeks.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ & Trust Signals -->
+    <section class="py-16 bg-primary">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="font-heading uppercase text-3xl mb-4">Frequently Asked Questions</h2>
+                    <p class="max-w-2xl mx-auto text-textSecondary">Everything you need to know</p>
+                </div>
+                
+                <div class="space-y-4 mb-12">
+                    <div class="accordion-item bg-secondary rounded-lg overflow-hidden shadow">
+                        <button class="accordion-btn w-full flex justify-between items-center p-6 text-left">
+                            <span class="font-heading uppercase">How soon will I see results?</span>
+                            <i class="fas fa-chevron-down transition-transform"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="p-6 pt-0">
+                                <p>While individual results vary, most women report noticing initial changes in skin hydration and joint comfort within 2-4 weeks. More significant improvements in skin elasticity, wrinkle reduction, and hair/nail strength typically become noticeable after 8-12 weeks of consistent daily use.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item bg-secondary rounded-lg overflow-hidden shadow">
+                        <button class="accordion-btn w-full flex justify-between items-center p-6 text-left">
+                            <span class="font-heading uppercase">Is RadiantGlow safe for everyone?</span>
+                            <i class="fas fa-chevron-down transition-transform"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="p-6 pt-0">
+                                <p>Our formula is generally safe for most adults. However, if you have a known allergy to fish or shellfish, are pregnant or nursing, or have a medical condition, we recommend consulting with your healthcare provider before use. RadiantGlow is gluten-free, dairy-free, and contains no artificial additives.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item bg-secondary rounded-lg overflow-hidden shadow">
+                        <button class="accordion-btn w-full flex justify-between items-center p-6 text-left">
+                            <span class="font-heading uppercase">What's the difference between marine and bovine collagen?</span>
+                            <i class="fas fa-chevron-down transition-transform"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="p-6 pt-0">
+                                <p>Marine collagen (from fish) contains primarily Type I collagen, which is the most abundant type in our skin, hair, and nails. It has smaller molecules than bovine (beef) collagen, making it more easily absorbed. Studies suggest marine collagen may be up to 1.5 times more bioavailable than bovine sources.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item bg-secondary rounded-lg overflow-hidden shadow">
+                        <button class="accordion-btn w-full flex justify-between items-center p-6 text-left">
+                            <span class="font-heading uppercase">Can I take RadiantGlow with other supplements?</span>
+                            <i class="fas fa-chevron-down transition-transform"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="p-6 pt-0">
+                                <p>Yes! RadiantGlow complements most supplement regimens. For optimal results, we recommend pairing it with our Omega-3 and Vitamin D3+K2 formulas (included in our Complete Wellness Pack). These nutrients work synergistically to support skin health, joint function, and overall wellness.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item bg-secondary rounded-lg overflow-hidden shadow">
+                        <button class="accordion-btn w-full flex justify-between items-center p-6 text-left">
+                            <span class="font-heading uppercase">What if I'm not satisfied with my results?</span>
+                            <i class="fas fa-chevron-down transition-transform"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="p-6 pt-0">
+                                <p>We stand behind our product with a 60-day satisfaction guarantee. If you don't experience noticeable benefits after consistent use for two months, simply contact our customer care team for a full refund of your purchase price—no questions asked.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center">
+                    <h3 class="font-heading uppercase text-xl mb-6">Trusted By Women Worldwide</h3>
+                    <div class="flex flex-wrap justify-center items-center gap-8 mb-8">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Flag_of_Europe.svg/255px-Flag_of_Europe.svg.png" alt="EU Certified" class="h-12">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/FDA_logo.svg/250px-FDA_logo.svg.png" alt="FDA Registered" class="h-12">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/NSF_logo.svg/320px-NSF_logo.svg.png" alt="NSF Certified" class="h-12">
+                    </div>
+                    <div class="flex flex-wrap justify-center items-center gap-6">
+                        <div class="flex items-center">
+                            <i class="fas fa-lock text-2xl mr-2 text-accent"></i>
+                            <span>Secure Checkout</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-shield-alt text-2xl mr-2 text-accent"></i>
+                            <span>Privacy Protected</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-truck text-2xl mr-2 text-accent"></i>
+                            <span>Free Shipping Over $50</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-textPrimary text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="font-heading uppercase text-lg mb-4">Shop</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-highlight transition">Marine Collagen</a></li>
+                        <li><a href="#" class="hover:text-highlight transition">Complete Wellness Pack</a></li>
+                        <li><a href="#" class="hover:text-highlight transition">Subscribe & Save</a></li>
+                        <li><a href="#" class="hover:text-highlight transition">Gift Cards</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-heading uppercase text-lg mb-4">Learn</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#benefits" class="hover:text-highlight transition">Benefits</a></li>
+                        <li><a href="#science" class="hover:text-highlight transition">Science</a></li>
+                        <li><a href="#" class="hover:text-highlight transition">Blog</a></li>
+                        <li><a href="#" class="hover:text-highlight transition">Recipes</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-heading uppercase text-lg mb-4">Company</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-highlight transition">About Us</a></li>
+                        <li><a href="#" class="hover:text-highlight transition">Contact</a></li>
+                        <li><a href="#" class="hover:text-highlight transition">FAQ</a></li>
+                        <li><a href="#" class="hover:text-highlight transition">Shipping & Returns</a></li>
+                        <li><a href="#" class="hover:text-highlight transition">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-heading uppercase text-lg mb-4">Join Our Community</h3>
+                    <p class="mb-4">Sign up for exclusive tips, special offers, and early access to new products.</p>
+                    <form class="mb-4">
+                        <div class="flex">
+                            <input type="email" placeholder="Your email" class="px-4 py-2 rounded-l-lg text-textPrimary w-full">
+                            <button type="submit" class="bg-highlight hover:bg-accent px-4 py-2 rounded-r-lg font-heading uppercase text-sm">Join</button>
+                        </div>
+                    </form>
+                    <p class="text-sm text-highlight">Plus, save 10% on your first order!</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="hover:text-highlight transition"><i class="fab fa-instagram text-xl"></i></a>
+                        <a href="#" class="hover:text-highlight transition"><i class="fab fa-facebook-f text-xl"></i></a>
+                        <a href="#" class="hover:text-highlight transition"><i class="fab fa-pinterest-p text-xl"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-gray-700 text-center text-sm text-gray-400">
+                <p>© 2023 RadiantGlow. All rights reserved. These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Checkout & Upsell Page (Modal) -->
+    <div id="checkout-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg max-w-6xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-4 border-b flex justify-between items-center">
+                <h2 class="font-heading uppercase text-xl">Complete Your Order</h2>
+                <button id="close-checkout" class="text-textSecondary hover:text-accent">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="flex flex-col lg:flex-row">
+                <!-- Order Summary -->
+                <div class="lg:w-2/3 p-6">
+                    <h3 class="font-heading uppercase text-lg mb-4">Your Cart</h3>
+                    
+                    <div class="flex items-start border-b pb-6 mb-6">
+                        <div class="w-24 h-24 bg-primary rounded-lg flex items-center justify-center mr-4">
+                            <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80" 
+                                 alt="Marine Collagen" 
+                                 class="w-16 h-16 object-contain">
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-bold">Marine Collagen Complex</h4>
+                            <p class="text-sm text-textSecondary mb-2">30-day supply</p>
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center border rounded-lg">
+                                    <button class="px-3 py-1 text-textSecondary hover:text-accent">-</button>
+                                    <span class="px-3">1</span>
+                                    <button class="px-3 py-1 text-textSecondary hover:text-accent">+</button>
+                                </div>
+                                <span class="font-bold">$59.00</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="flex items-center">
+                            <input type="checkbox" id="subscription" class="mr-2">
+                            <label for="subscription">Subscribe & Save 15%</label>
+                        </div>
+                        <span class="text-accent font-bold">$50.15 every month</span>
+                    </div>
+                    
+                    <div class="bg-primary p-4 rounded-lg mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span>Subtotal:</span>
+                            <span>$59.00</span>
+                        </div>
+                        <div class="flex justify-between mb-2">
+                            <span>Shipping:</span>
+                            <span>$5.00</span>
+                        </div>
+                        <div class="flex justify-between font-bold text-lg">
+                            <span>Total:</span>
+                            <span>$64.00</span>
+                        </div>
+                    </div>
+                    
+                    <button class="bg-accent hover:bg-highlight text-white w-full py-3 rounded-full font-heading uppercase transition mb-4">
+                        Secure Checkout
+                    </button>
+                    
+                    <div class="flex justify-center space-x-4">
+                        <i class="fab fa-cc-visa text-2xl text-gray-400"></i>
+                        <i class="fab fa-cc-mastercard text-2xl text-gray-400"></i>
+                        <i class="fab fa-cc-amex text-2xl text-gray-400"></i>
+                        <i class="fab fa-cc-discover text-2xl text-gray-400"></i>
+                        <i class="fab fa-cc-paypal text-2xl text-gray-400"></i>
+                    </div>
+                </div>
+                
+                <!-- Upsell Modules -->
+                <div class="lg:w-1/3 bg-gray-50 p-6">
+                    <h3 class="font-heading uppercase text-lg mb-4">Complete Your Wellness Routine</h3>
+                    
+                    <!-- Upsell 1 -->
+                    <div class="bg-white p-4 rounded-lg shadow-sm mb-4">
+                        <div class="flex items-start mb-3">
+                            <div class="w-16 h-16 bg-primary rounded-lg flex items-center justify-center mr-3">
+                                <img src="https://images.unsplash.com/photo-1625579152913-7c1f26914bff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80" 
+                                     alt="Omega-3" 
+                                     class="w-12 h-12 object-contain">
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Omega-3 Fatty Acids</h4>
+                                <p class="text-sm text-textSecondary">Support joint & heart health</p>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold">$29.00</span>
+                            <button class="bg-highlight hover:bg-accent text-white px-4 py-1 rounded-full text-sm transition">
+                                Add to Order
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Upsell 2 -->
+                    <div class="bg-white p-4 rounded-lg shadow-sm mb-4">
+                        <div class="flex items-start mb-3">
+                            <div class="w-16 h-16 bg-primary rounded-lg flex items-center justify-center mr-3">
+                                <img src="https://images.unsplash.com/photo-1587854692152-e33df282cd8a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80" 
+                                     alt="Vitamin D3" 
+                                     class="w-12 h-12 object-contain">
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Vitamin D3 + K2</h4>
+                                <p class="text-sm text-textSecondary">Boost absorption & bone health</p>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold">$24.00</span>
+                            <button class="bg-highlight hover:bg-accent text-white px-4 py-1 rounded-full text-sm transition">
+                                Add to Order
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Bundle Offer -->
+                    <div class="bg-accent bg-opacity-10 p-4 rounded-lg border border-accent">
+                        <div class="flex items-center mb-3">
+                            <input type="checkbox" id="bundle" class="mr-3">
+                            <label for="bundle" class="font-bold">Complete Wellness Pack</label>
+                        </div>
+                        <div class="flex mb-3">
+                            <div class="w-1/3 pr-1">
+                                <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80" 
+                                     alt="Marine Collagen" 
+                                     class="w-full rounded border border-accent">
+                            </div>
+                            <div class="w-1/3 px-1">
+                                <img src="https://images.unsplash.com/photo-1625579152913-7c1f26914bff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80" 
+                                     alt="Omega-3" 
+                                     class="w-full rounded border border-accent">
+                            </div>
+                            <div class="w-1/3 pl-1">
+                                <img src="https://images.unsplash.com/photo-1587854692152-e33df282cd8a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80" 
+                                     alt="Vitamin D3" 
+                                     class="w-full rounded border border-accent">
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <span class="line-through text-textSecondary">$112.00</span>
+                                <span class="font-bold ml-2">$89.60</span>
+                                <span class="text-accent text-sm ml-2">(save 20%)</span>
+                            </div>
+                            <button class="bg-accent hover:bg-highlight text-white px-4 py-1 rounded-full text-sm transition">
+                                Add Bundle
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Post-Purchase Thank You Page (Modal) -->
+    <div id="thankyou-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6 text-center">
+                <div class="bg-green-100 text-green-800 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-check text-3xl"></i>
+                </div>
+                <h2 class="font-heading uppercase text-2xl mb-4">Thank you for joining the RadiantGlow family!</h2>
+                <p class="mb-6">Your order #RG2023 has been confirmed. We've sent the details to your email.</p>
+                
+                <div class="bg-primary p-4 rounded-lg mb-6 text-left">
+                    <h3 class="font-heading uppercase text-lg mb-3">Order Summary</h3>
+                    <div class="flex justify-between mb-2">
+                        <span>Marine Collagen Complex (30-day supply)</span>
+                        <span>$59.00</span>
+                    </div>
+                    <div class="flex justify-between mb-2">
+                        <span>Shipping</span>
+                        <span>$5.00</span>
+                    </div>
+                    <div class="flex justify-between font-bold border-t pt-2">
+                        <span>Total</span>
+                        <span>$64.00</span>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <div class="bg-accent text-white rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h4 class="font-heading uppercase text-sm mb-2">Get Exclusive Tips</h4>
+                        <p class="text-sm text-textSecondary mb-3">Join our newsletter for healthy aging advice</p>
+                        <input type="email" placeholder="Your email" class="w-full px-3 py-2 rounded border mb-2 text-sm">
+                        <button class="bg-accent hover:bg-highlight text-white w-full py-2 rounded-full text-sm transition">
+                            Subscribe
+                        </button>
+                    </div>
+                    
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <div class="bg-accent text-white rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h4 class="font-heading uppercase text-sm mb-2">Free E-Book</h4>
+                        <p class="text-sm text-textSecondary mb-3">Download your 'Healthy Aging Guide'</p>
+                        <button class="bg-accent hover:bg-highlight text-white w-full py-2 rounded-full text-sm transition">
+                            Download Now
+                        </button>
+                    </div>
+                    
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <div class="bg-accent text-white rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h4 class="font-heading uppercase text-sm mb-2">Never Run Out</h4>
+                        <p class="text-sm text-textSecondary mb-3">Switch to subscription & save 20%</p>
+                        <button class="bg-accent hover:bg-highlight text-white w-full py-2 rounded-full text-sm transition">
+                            Subscribe & Save
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <h4 class="font-heading uppercase text-lg mb-3">Share Your RadiantGlow</h4>
+                    <p class="text-sm text-textSecondary mb-3">Tag us @RadiantGlow and use #RadiantAtAnyAge for a chance to be featured!</p>
+                    <div class="flex justify-center space-x-4">
+                        <a href="#" class="bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="bg-pink-600 text-white rounded-full w-10 h-10 flex items-center justify-center">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="bg-blue-400 text-white rounded-full w-10 h-10 flex items-center justify-center">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="bg-red-600 text-white rounded-full w-10 h-10 flex items-center justify-center">
+                            <i class="fab fa-pinterest-p"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <button id="close-thankyou" class="bg-accent hover:bg-highlight text-white px-6 py-2 rounded-full font-heading uppercase text-sm transition">
+                    Continue Shopping
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Tab System
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons and contents
+                tabButtons.forEach(btn => btn.classList.remove('active', 'text-accent', 'border-accent'));
+                tabContents.forEach(content => content.classList.remove('active'));
+                
+                // Add active class to clicked button
+                button.classList.add('active', 'text-accent', 'border-accent');
+                
+                // Show corresponding content
+                const tabId = button.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // Accordion System
+        const accordionButtons = document.querySelectorAll('.accordion-btn');
+        
+        accordionButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const accordionItem = button.closest('.accordion-item');
+                const content = accordionItem.querySelector('.accordion-content');
+                const icon = button.querySelector('i');
+                
+                // Toggle active class on content
+                content.classList.toggle('active');
+                
+                // Rotate icon
+                icon.classList.toggle('rotate-180');
+            });
+        });
+
+        // Testimonial Carousel
+        const carousel = document.getElementById('testimonial-carousel');
+        const prevButton = document.getElementById('prev-testimonial');
+        const nextButton = document.getElementById('next-testimonial');
+        const slides = document.querySelectorAll('.testimonial-slide');
+        let currentIndex = 0;
+        
+        function updateCarousel() {
+            const slideWidth = slides[0].offsetWidth;
+            carousel.scrollTo({
+                left: currentIndex * slideWidth,
+                behavior: 'smooth'
+            });
+        }
+        
+        prevButton.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+            } else {
+                currentIndex = slides.length - 1;
+            }
+            updateCarousel();
+        });
+        
+        nextButton.addEventListener('click', () => {
+            if (currentIndex < slides.length - 1) {
+                currentIndex++;
+            } else {
+                currentIndex = 0;
+            }
+            updateCarousel();
+        });
+
+        // Checkout Modal
+        const checkoutModal = document.getElementById('checkout-modal');
+        const closeCheckout = document.getElementById('close-checkout');
+        const buyButtons = document.querySelectorAll('a[href="#shop"], .font-heading.uppercase');
+        
+        buyButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                if (button.getAttribute('href') === '#shop') {
+                    e.preventDefault();
+                    checkoutModal.classList.remove('hidden');
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+        });
+        
+        closeCheckout.addEventListener('click', () => {
+            checkoutModal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        });
+
+        // Thank You Modal (for demo purposes)
+        const thankyouModal = document.getElementById('thankyou-modal');
+        const closeThankyou = document.getElementById('close-thankyou');
+        const checkoutButton = document.querySelector('.bg-accent.hover\\:bg-highlight');
+        
+        checkoutButton.addEventListener('click', () => {
+            checkoutModal.classList.add('hidden');
+            thankyouModal.classList.remove('hidden');
+        });
+        
+        closeThankyou.addEventListener('click', () => {
+            thankyouModal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        });
+
+        // Close modals when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === checkoutModal) {
+                checkoutModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+            if (e.target === thankyouModal) {
+                thankyouModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+        });
+    </script>
+</body>
+</html>
