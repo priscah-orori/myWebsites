@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rorey Ventures - AI-Powered Business Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#001F3F',
+                        ventureGreen: '#2ECC71',
+                        accentGold: '#FFD700',
+                        accentOrange: '#FF851B',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #001F3F 0%, #2ECC71 100%);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .industry-card {
+            transition: all 0.3s ease;
+        }
+        
+        .industry-card:hover {
+            transform: scale(1.03);
+        }
+        
+        .how-it-works-step::before {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 100%;
+            background: #2ECC71;
+            left: 40px;
+            top: 60px;
+            z-index: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .how-it-works-step::before {
+                display: none;
+            }
+        }
+        
+        .testimonial-card {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .pricing-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <a href="#" class="text-2xl font-bold text-navy">
+                        <span class="text-ventureGreen">Rorey</span>Ventures
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#features" class="text-gray-700 hover:text-ventureGreen transition">Features</a>
+                    <a href="#industries" class="text-gray-700 hover:text-ventureGreen transition">Industries</a>
+                    <a href="#how-it-works" class="text-gray-700 hover:text-ventureGreen transition">How It Works</a>
+                    <a href="#pricing" class="text-gray-700 hover:text-ventureGreen transition">Pricing</a>
+                    <a href="#faq" class="text-gray-700 hover:text-ventureGreen transition">FAQ</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="menu-toggle" class="text-gray-700 focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+                <div class="hidden md:block">
+                    <a href="#contact" class="bg-ventureGreen text-white px-4 py-2 rounded-md hover:bg-green-600 transition">Get Started</a>
+                </div>
+            </div>
+            <!-- Mobile menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4">
+                <a href="#features" class="block py-2 text-gray-700 hover:text-ventureGreen transition">Features</a>
+                <a href="#industries" class="block py-2 text-gray-700 hover:text-ventureGreen transition">Industries</a>
+                <a href="#how-it-works" class="block py-2 text-gray-700 hover:text-ventureGreen transition">How It Works</a>
+                <a href="#pricing" class="block py-2 text-gray-700 hover:text-ventureGreen transition">Pricing</a>
+                <a href="#faq" class="block py-2 text-gray-700 hover:text-ventureGreen transition">FAQ</a>
+                <a href="#contact" class="block mt-2 bg-ventureGreen text-white px-4 py-2 rounded-md text-center hover:bg-green-600 transition">Get Started</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white py-20 md:py-32">
+        <div class="container mx-auto px-6 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-10 md:mb-0">
+                <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-6">
+                    Automate Your Marketing, Leads & Support with AI
+                </h1>
+                <p class="text-xl mb-8 text-gray-100">
+                    Rorey Ventures provides cutting-edge AI solutions to help small businesses grow revenue and save time.
+                </p>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="#contact" class="bg-accentGold text-navy font-bold px-6 py-3 rounded-md text-center hover:bg-yellow-500 transition">
+                        Book a Demo
+                    </a>
+                    <a href="#how-it-works" class="bg-white text-navy font-bold px-6 py-3 rounded-md text-center hover:bg-gray-100 transition">
+                        How It Works
+                    </a>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center">
+                <img src="https://illustrations.popsy.co/amber/artificial-intelligence.svg" alt="AI Illustration" class="w-full max-w-md">
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto">
+                <h2 class="text-3xl font-bold text-navy mb-6">Revolutionizing Business Operations with AI</h2>
+                <p class="text-lg text-gray-600 mb-8">
+                    At Rorey Ventures, we believe every business deserves access to enterprise-grade automation tools. Our AI-powered solutions are designed specifically for startups, small businesses, and service-based trades to help you focus on what matters most - growing your business.
+                </p>
+                <div class="flex justify-center">
+                    <div class="w-20 h-1 bg-ventureGreen"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-navy mb-4">Powerful Features for Your Business</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Our AI solutions handle the heavy lifting so you can focus on your customers</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Feature 1 -->
+                <div class="feature-card bg-white p-8 rounded-lg shadow-md transition duration-300">
+                    <div class="w-16 h-16 bg-ventureGreen bg-opacity-10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-bullhorn text-2xl text-ventureGreen"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-navy mb-3">Marketing Automation</h3>
+                    <p class="text-gray-600">
+                        Automate email campaigns, social media posting, and customer follow-ups with our intelligent AI system.
+                    </p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="feature-card bg-white p-8 rounded-lg shadow-md transition duration-300">
+                    <div class="w-16 h-16 bg-accentOrange bg-opacity-10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-chart-line text-2xl text-accentOrange"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-navy mb-3">Lead Generation</h3>
+                    <p class="text-gray-600">
+                        Our AI identifies and qualifies leads 24/7, ensuring you never miss a potential customer.
+                    </p>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="feature-card bg-white p-8 rounded-lg shadow-md transition duration-300">
+                    <div class="w-16 h-16 bg-accentGold bg-opacity-10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-headset text-2xl text-accentGold"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-navy mb-3">Customer Support</h3>
+                    <p class="text-gray-600">
+                        AI-powered chatbots and ticket routing handle 80% of customer inquiries instantly.
+                    </p>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="feature-card bg-white p-8 rounded-lg shadow-md transition duration-300">
+                    <div class="w-16 h-16 bg-navy bg-opacity-10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-tasks text-2xl text-navy"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-navy mb-3">Admin Automation</h3>
+                    <p class="text-gray-600">
+                        Automate scheduling, invoicing, and paperwork to save hours of administrative work.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Industries Section -->
+    <section id="industries" class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-navy mb-4">AI Works for Every Business</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">From startups to service trades, our solutions adapt to your needs</p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Industry 1 -->
+                <div class="industry-card bg-gray-50 rounded-lg overflow-hidden shadow-md">
+                    <div class="h-48 bg-gradient-to-r from-navy to-ventureGreen flex items-center justify-center">
+                        <i class="fas fa-tools text-white text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-navy mb-2">Plumbing Services</h3>
+                        <p class="text-gray-600">
+                            Automate appointment scheduling, customer follow-ups, and emergency call routing.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Industry 2 -->
+                <div class="industry-card bg-gray-50 rounded-lg overflow-hidden shadow-md">
+                    <div class="h-48 bg-gradient-to-r from-ventureGreen to-accentGold flex items-center justify-center">
+                        <i class="fas fa-snowflake text-white text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-navy mb-2">HVAC Companies</h3>
+                        <p class="text-gray-600">
+                            Smart seasonal marketing campaigns and preventive maintenance reminders.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Industry 3 -->
+                <div class="industry-card bg-gray-50 rounded-lg overflow-hidden shadow-md">
+                    <div class="h-48 bg-gradient-to-r from-accentGold to-accentOrange flex items-center justify-center">
+                        <i class="fas fa-lightbulb text-white text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-navy mb-2">Startups</h3>
+                        <p class="text-gray-600">
+                            Scale your operations without scaling your team with our AI solutions.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Industry 4 -->
+                <div class="industry-card bg-gray-50 rounded-lg overflow-hidden shadow-md">
+                    <div class="h-48 bg-gradient-to-r from-accentOrange to-navy flex items-center justify-center">
+                        <i class="fas fa-store text-white text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-navy mb-2">Small Retail</h3>
+                        <p class="text-gray-600">
+                            Personalized marketing and inventory management powered by AI.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-navy mb-4">Simple 3-Step Process</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">See how Rorey Ventures transforms your business operations</p>
+            </div>
+            
+            <div class="relative">
+                <!-- Step 1 -->
+                <div class="how-it-works-step relative mb-16 md:mb-32 pl-20">
+                    <div class="absolute left-0 top-0 w-20 h-20 rounded-full bg-ventureGreen flex items-center justify-center text-white font-bold text-2xl z-10">
+                        1
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-md">
+                        <h3 class="text-xl font-bold text-navy mb-3">Customer Inquiry</h3>
+                        <p class="text-gray-600 mb-4">
+                            Potential clients reach out through your website, social media, or phone. Our AI instantly engages them with personalized responses.
+                        </p>
+                        <div class="flex justify-center">
+                            <i class="fas fa-comments text-4xl text-ventureGreen"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="how-it-works-step relative mb-16 md:mb-32 pl-20">
+                    <div class="absolute left-0 top-0 w-20 h-20 rounded-full bg-accentOrange flex items-center justify-center text-white font-bold text-2xl z-10">
+                        2
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-md">
+                        <h3 class="text-xl font-bold text-navy mb-3">AI Agent Processing</h3>
+                        <p class="text-gray-600 mb-4">
+                            Our AI qualifies the lead, answers questions, schedules appointments, and even processes payments - all without human intervention.
+                        </p>
+                        <div class="flex justify-center">
+                            <i class="fas fa-robot text-4xl text-accentOrange"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="how-it-works-step relative pl-20">
+                    <div class="absolute left-0 top-0 w-20 h-20 rounded-full bg-accentGold flex items-center justify-center text-white font-bold text-2xl z-10">
+                        3
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-md">
+                        <h3 class="text-xl font-bold text-navy mb-3">Booked Client</h3>
+                        <p class="text-gray-600 mb-4">
+                            The AI seamlessly hands off confirmed appointments to your team, with all the details they need to deliver excellent service.
+                        </p>
+                        <div class="flex justify-center">
+                            <i class="fas fa-calendar-check text-4xl text-accentGold"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-navy mb-4">Trusted by Businesses Nationwide</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">See what our customers say about Rorey Ventures</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card bg-gray-50 p-8 rounded-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-ventureGreen flex items-center justify-center text-white font-bold mr-4">
+                            JD
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-navy">John D.</h4>
+                            <p class="text-gray-500 text-sm">Plumbing Business Owner</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">
+                        "Rorey's AI handles 90% of our customer inquiries now. Our team can focus on the jobs instead of scheduling. Bookings are up 40%!"
+                    </p>
+                    <div class="flex mt-4 text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card bg-gray-50 p-8 rounded-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-accentOrange flex items-center justify-center text-white font-bold mr-4">
+                            SM
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-navy">Sarah M.</h4>
+                            <p class="text-gray-500 text-sm">HVAC Company CEO</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">
+                        "The marketing automation has transformed our business. We're booking more maintenance contracts than ever with less effort."
+                    </p>
+                    <div class="flex mt-4 text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card bg-gray-50 p-8 rounded-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-navy flex items-center justify-center text-white font-bold mr-4">
+                            TP
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-navy">Tom P.</h4>
+                            <p class="text-gray-500 text-sm">Tech Startup Founder</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">
+                        "As a small team, we couldn't afford a full-time support staff. Rorey's AI solution gave us enterprise-level support at a fraction of the cost."
+                    </p>
+                    <div class="flex mt-4 text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-ventureGreen bg-opacity-10 p-8 rounded-lg">
+                <div class="text-center">
+                    <h3 class="text-2xl font-bold text-navy mb-2">80% of leads are booked by our AI agents</h3>
+                    <p class="text-gray-600">Average across all our clients in the last 6 months</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-navy mb-4">Simple, Transparent Pricing</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Choose the plan that fits your business needs</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- Plan 1 -->
+                <div class="pricing-card bg-white p-8 rounded-lg shadow-md border-t-4 border-ventureGreen transition duration-300">
+                    <h3 class="text-xl font-bold text-navy mb-2">Starter</h3>
+                    <p class="text-gray-600 mb-6">Perfect for small businesses getting started</p>
+                    <div class="mb-6">
+                        <span class="text-4xl font-bold text-navy">$99</span>
+                        <span class="text-gray-500">/month</span>
+                    </div>
+                    <ul class="mb-8 space-y-3">
+                        <li class="flex items-center text-gray-600">
+                            <i class="fas fa-check text-ventureGreen mr-2"></i> Basic Marketing Automation
+                        </li>
+                        <li class="flex items-center text-gray-600">
+                            <i class="fas fa-check text-ventureGreen mr-2"></i> Lead Capture & Qualification
+                        </li>
+                        <li class="flex items-center text-gray-600">
+                            <i class="fas fa-check text-ventureGreen mr-2"></i> Email Support
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <i class="fas fa-times text-red-400 mr-2"></i> Advanced AI Features
+                        </li>
+                    </ul>
+                    <a href="#contact" class="block text-center bg-gray-100 text-navy font-bold py-3 rounded-md hover:bg-gray-200 transition">
+                        Get Started
+                    </a>
+                </div>
+                
+                <!-- Plan 2 (Featured) -->
+                <div class="pricing-card bg-white p-8 rounded-lg shadow-lg border-t-4 border-accentOrange transform scale-105 transition duration-300 relative">
+                    <div class="absolute top-0 right-0 bg-accentOrange text-white px-3 py-1 text-xs font-bold rounded-bl-lg">
+                        MOST POPULAR
+                    </div>
+                    <h3 class="text-xl font-bold text-navy mb-2">Professional</h3>
+                    <p class="text-gray-600 mb-6">For growing businesses with more needs</p>
+                    <div class="mb-6">
+                        <span class="text-4xl font-bold text-navy">$299</span>
+                        <span class="text-gray-500">/month</span>
+                    </div>
+                    <ul class="mb-8 space-y-3">
+                        <li class="flex items-center text-gray-600">
+                            <i class="fas fa-check text-ventureGreen mr-2"></i> Full Marketing Automation
+                        </li>
+                        <li class="flex items-center text-gray-600">
+                            <i class="fas fa-check text-ventureGreen mr-2"></i> Advanced Lead Generation
+                        </li>
+                        <li class="flex items-center text-gray-600">
+                            <i class="fas fa-check text-ventureGreen mr-2"></i> AI Customer Support
+                        </li>
+                        <li class="flex items-center text-gray-600">
+                            <i class="fas fa-check text-ventureGreen mr-2"></i> Basic Admin Automation
+                        </li>
+                    </ul>
+                    <a href="#contact" class="block text-center bg-accentOrange text-white font-bold py-3 rounded-md hover:bg-orange-500 transition">
+                        Get Started
+                    </a>
+                </div>
+                
+                <!-- Plan 3 -->
+                <div class="pricing-card bg-white p-8 rounded-lg shadow-md border-t-4 border-navy transition duration-300">
+                    <h3 class="text-xl font-bold text-navy mb-2">Enterprise</h3>
+                    <p class="text-gray-600 mb-6">Custom solutions for your business</p>
+                    <div class="mb-6">
+                        <span class="text-4xl font-bold text-navy">Custom</span>
+                    </div>
+                    <ul class="mb-8 space-y-3">
+                        <li class="flex items-center text-gray-600">
+                            <i class="fas fa-check text-ventureGreen mr-2"></i> All Professional Features
+                        </li>
+                        <li class="flex items-center text-gray-600">
+                            <i class="fas fa-check text-ventureGreen mr-2"></i> Full Admin Automation
+                        </li>
+                        <li class="flex items-center text-gray-600">
+                            <i class="fas fa-check text-ventureGreen mr-2"></i> Dedicated Account Manager
+                        </li>
+                        <li class="flex items-center text-gray-600">
+                            <i class="fas fa-check text-ventureGreen mr-2"></i> Custom AI Development
+                        </li>
+                    </ul>
+                    <a href="#contact" class="block text-center bg-gray-100 text-navy font-bold py-3 rounded-md hover:bg-gray-200 transition">
+                        Contact Sales
+                    </a>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center">
+                <p class="text-gray-600 mb-4">Not sure which plan is right for you?</p>
+                <a href="#contact" class="inline-block bg-ventureGreen text-white px-6 py-3 rounded-md font-bold hover:bg-green-600 transition">
+                    Book a Free Demo
+                </a>
+                <p class="text-gray-500 text-sm mt-2">No credit card required</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-16 bg-white">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-navy mb-4">Frequently Asked Questions</h2>
+                <p class="text-gray-600">Everything you need to know about Rorey Ventures</p>
+            </div>
+            
+            <div class="space-y-6">
+                <!-- FAQ 1 -->
+                <div class="border-b border-gray-200 pb-6">
+                    <button class="faq-toggle flex justify-between items-center w-full text-left focus:outline-none">
+                        <h3 class="text-xl font-semibold text-navy">Will AI replace my staff?</h3>
+                        <i class="fas fa-chevron-down text-ventureGreen transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content mt-4 hidden">
+                        <p class="text-gray-600">
+                            Absolutely not. Our AI solutions are designed to handle repetitive tasks and initial customer interactions, freeing up your staff to focus on higher-value work that requires human judgment and personal touch. Most of our clients find they can serve more customers without adding staff.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- FAQ 2 -->
+                <div class="border-b border-gray-200 pb-6">
+                    <button class="faq-toggle flex justify-between items-center w-full text-left focus:outline-none">
+                        <h3 class="text-xl font-semibold text-navy">Is my data secure with your system?</h3>
+                        <i class="fas fa-chevron-down text-ventureGreen transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content mt-4 hidden">
+                        <p class="text-gray-600">
+                            Security is our top priority. We use enterprise-grade encryption for all data in transit and at rest. Our systems are regularly audited and comply with industry-standard security protocols. You retain full ownership of your data at all times.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- FAQ 3 -->
+                <div class="border-b border-gray-200 pb-6">
+                    <button class="faq-toggle flex justify-between items-center w-full text-left focus:outline-none">
+                        <h3 class="text-xl font-semibold text-navy">How long does implementation take?</h3>
+                        <i class="fas fa-chevron-down text-ventureGreen transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content mt-4 hidden">
+                        <p class="text-gray-600">
+                            Most businesses are up and running within 2 weeks. Our onboarding team works closely with you to configure the system to your specific needs. The basic setup can be done in as little as 3 days for simple implementations.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- FAQ 4 -->
+                <div class="border-b border-gray-200 pb-6">
+                    <button class="faq-toggle flex justify-between items-center w-full text-left focus:outline-none">
+                        <h3 class="text-xl font-semibold text-navy">What if I need help after setup?</h3>
+                        <i class="fas fa-chevron-down text-ventureGreen transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content mt-4 hidden">
+                        <p class="text-gray-600">
+                            We offer comprehensive support for all our plans. Email support is included with all packages, and our Professional and Enterprise plans include phone support. We also have an extensive knowledge base and video tutorials available 24/7.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- FAQ 5 -->
+                <div class="pb-6">
+                    <button class="faq-toggle flex justify-between items-center w-full text-left focus:outline-none">
+                        <h3 class="text-xl font-semibold text-navy">Can I cancel anytime?</h3>
+                        <i class="fas fa-chevron-down text-ventureGreen transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content mt-4 hidden">
+                        <p class="text-gray-600">
+                            Yes, all our plans are month-to-month with no long-term contracts. You can cancel anytime with 30 days notice. We don't believe in locking you in - we want to earn your business every month.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section id="contact" class="py-16 bg-gradient-to-r from-navy to-ventureGreen text-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to Transform Your Business?</h2>
+                <p class="text-xl max-w-2xl mx-auto text-gray-100">
+                    Schedule a free demo today and see how Rorey Ventures can work for you.
+                </p>
+            </div>
+            
+            <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-xl overflow-hidden">
+                <div class="md:flex">
+                    <div class="md:w-1/2 p-8 bg-gray-50">
+                        <h3 class="text-2xl font-bold text-navy mb-4">Contact Information</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <i class="fas fa-envelope text-ventureGreen mr-4"></i>
+                                <span class="text-gray-600">hello@roreyventures.com</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-phone text-ventureGreen mr-4"></i>
+                                <span class="text-gray-600">(555) 123-4567</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-map-marker-alt text-ventureGreen mr-4"></i>
+                                <span class="text-gray-600">123 Business Ave, Tech City</span>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h4 class="text-lg font-semibold text-navy mb-3">Follow Us</h4>
+                            <div class="flex space-x-4">
+                                <a href="#" class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-700 hover:bg-ventureGreen hover:text-white transition">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-700 hover:bg-ventureGreen hover:text-white transition">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-700 hover:bg-ventureGreen hover:text-white transition">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-700 hover:bg-ventureGreen hover:text-white transition">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="md:w-1/2 p-8">
+                        <form id="contactForm" class="space-y-4">
+                            <div>
+                                <label for="name" class="block text-gray-700 font-medium mb-1">Name</label>
+                                <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-ventureGreen">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-gray-700 font-medium mb-1">Email</label>
+                                <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-ventureGreen">
+                            </div>
+                            <div>
+                                <label for="business" class="block text-gray-700 font-medium mb-1">Business Type</label>
+                                <select id="business" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-ventureGreen">
+                                    <option value="">Select your business type</option>
+                                    <option value="plumbing">Plumbing/HVAC</option>
+                                    <option value="retail">Retail</option>
+                                    <option value="startup">Startup</option>
+                                    <option value="other">Other Service Business</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="message" class="block text-gray-700 font-medium mb-1">How Can We Help?</label>
+                                <textarea id="message" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-ventureGreen"></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-ventureGreen text-white py-3 rounded-md font-bold hover:bg-green-600 transition">
+                                Request Demo
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-navy text-white py-8">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <a href="#" class="text-2xl font-bold">
+                        <span class="text-ventureGreen">Rorey</span>Ventures
+                    </a>
+                </div>
+                <div class="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-8">
+                    <a href="#" class="hover:text-ventureGreen transition">Privacy Policy</a>
+                    <a href="#" class="hover:text-ventureGreen transition">Terms of Service</a>
+                    <a href="#" class="hover:text-ventureGreen transition">Careers</a>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2023 Rorey Ventures. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // FAQ toggle functionality
+        document.querySelectorAll('.faq-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                const icon = button.querySelector('i');
+                
+                content.classList.toggle('hidden');
+                icon.classList.toggle('transform');
+                icon.classList.toggle('rotate-180');
+            });
+        });
+
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const business = document.getElementById('business').value;
+            const message = document.getElementById('message').value;
+            
+            // Here you would typically send this data to your server
+            console.log({ name, email, business, message });
+            
+            // Show success message
+            alert('Thank you for your request! We will contact you shortly to schedule your demo.');
+            this.reset();
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (!document.getElementById('mobile-menu').classList.contains('hidden')) {
+                        document.getElementById('mobile-menu').classList.add('hidden');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
