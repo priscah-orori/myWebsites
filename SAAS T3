@@ -1,0 +1,604 @@
+import React, { useMemo, useState } from "react";
+
+// Rorey Ventures – Single-Page App + Pricing (Client-side routing)
+// Notes:
+// - TailwindCSS is expected to be available in the preview environment.
+// - All visuals are embedded as inline SVGs to keep the project self-contained.
+// - Update copy, pricing, and FAQs as needed.
+
+// ---------------------- Utility UI Bits ----------------------
+const Container = ({ className = "", children }) => (
+  <div className={`mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 ${className}`}>{children}</div>
+);
+
+const Section = ({ id, className = "", children }) => (
+  <section id={id} className={`py-16 sm:py-20 ${className}`}>{children}</section>
+);
+
+const PrimaryButton = ({ children, onClick, href }) => {
+  const common = "inline-flex items-center justify-center rounded-2xl px-5 py-3 font-semibold shadow-sm transition hover:shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2";
+  if (href) return (
+    <a href={href} className={`${common} bg-green-600 text-white focus:ring-green-600`}>{children}</a>
+  );
+  return (
+    <button onClick={onClick} className={`${common} bg-green-600 text-white focus:ring-green-600`}>{children}</button>
+  );
+};
+
+const SecondaryButton = ({ children, onClick }) => (
+  <button onClick={onClick} className="inline-flex items-center justify-center rounded-2xl px-5 py-3 font-semibold text-green-700 bg-green-50 hover:bg-green-100 border border-green-200 transition shadow-sm">
+    {children}
+  </button>
+);
+
+const Badge = ({ children }) => (
+  <span className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700">
+    {children}
+  </span>
+);
+
+// ---------------------- Brand Visuals (Inline SVGs) ----------------------
+const Logo = ({ className = "h-8 w-auto" }) => (
+  <div className={`flex items-center gap-2 ${className}`}>
+    <svg width="28" height="28" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#0B4F6C" />
+          <stop offset="100%" stopColor="#16A34A" />
+        </linearGradient>
+      </defs>
+      <rect x="4" y="4" width="56" height="56" rx="14" fill="url(#g)"/>
+      <path d="M18 40c8 6 20 6 28 0M18 24c8-6 20-6 28 0" stroke="white" strokeWidth="3" strokeLinecap="round"/>
+      <circle cx="32" cy="32" r="6" fill="white" />
+    </svg>
+    <span className="text-lg font-extrabold tracking-tight text-slate-900">Rorey <span className="text-emerald-600">Ventures</span></span>
+  </div>
+);
+
+const AINetworkIllo = ({ className = "w-full h-auto" }) => (
+  <svg viewBox="0 0 800 360" className={className} role="img" aria-label="AI network illustration">
+    <defs>
+      <linearGradient id="bggrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stopColor="#0b4f6c"/>
+        <stop offset="100%" stopColor="#122c34"/>
+      </linearGradient>
+      <radialGradient id="node" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stopColor="#a7f3d0"/>
+        <stop offset="100%" stopColor="#10b981"/>
+      </radialGradient>
+    </defs>
+    <rect x="0" y="0" width="800" height="360" rx="24" fill="url(#bggrad)"/>
+    {Array.from({ length: 18 }).map((_, i) => {
+      const x = 60 + (i * 40) % 680;
+      const y = 60 + ((i * 90) % 240);
+      return <circle key={i} cx={x} cy={y} r="6" fill="url(#node)" opacity="0.95"/>;
+    })}
+    {Array.from({ length: 22 }).map((_, i) => {
+      const x1 = 60 + (i * 35) % 680;
+      const y1 = 60 + ((i * 70) % 240);
+      const x2 = 60 + (i * 55) % 680;
+      const y2 = 60 + ((i * 40) % 240);
+      return <line key={`l-${i}`} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#34d399" strokeWidth="1.2" opacity="0.25"/>;
+    })}
+    <g transform="translate(540,60)">
+      <rect width="200" height="120" rx="12" fill="#0ea5e9" opacity="0.15" />
+      <rect x="12" y="16" width="176" height="16" rx="8" fill="#06b6d4"/>
+      <rect x="12" y="40" width="128" height="12" rx="6" fill="#67e8f9"/>
+      <rect x="12" y="60" width="156" height="12" rx="6" fill="#67e8f9"/>
+      <rect x="12" y="80" width="98" height="12" rx="6" fill="#67e8f9"/>
+    </g>
+  </svg>
+);
+
+const IndustryIcon = ({ type = "plumbing", className = "h-10 w-10" }) => {
+  switch (type) {
+    case "hvac":
+      return (
+        <svg viewBox="0 0 48 48" className={className} aria-hidden="true">
+          <circle cx="24" cy="24" r="20" fill="#e2e8f0"/>
+          <path d="M24 10v28M10 24h28M16 16l16 16M32 16L16 32" stroke="#0ea5e9" strokeWidth="2" strokeLinecap="round"/>
+        </svg>
+      );
+    case "startup":
+      return (
+        <svg viewBox="0 0 48 48" className={className} aria-hidden>
+          <rect x="6" y="6" width="36" height="36" rx="8" fill="#e2e8f0"/>
+          <path d="M12 32c6-10 18-10 24 0" stroke="#16a34a" strokeWidth="3" fill="none"/>
+          <path d="M18 28l6-10 6 10" stroke="#065f46" strokeWidth="2" fill="none" strokeLinecap="round"/>
+        </svg>
+      );
+    default:
+      return (
+        <svg viewBox="0 0 48 48" className={className} aria-hidden>
+          <rect x="6" y="6" width="36" height="36" rx="8" fill="#e2e8f0"/>
+          <path d="M14 30h20M18 30v-8a6 6 0 0112 0v8" stroke="#0b4f6c" strokeWidth="2.5" fill="none" strokeLinecap="round"/>
+          <circle cx="24" cy="32" r="2" fill="#0b4f6c"/>
+        </svg>
+      );
+  }
+};
+
+const ChartIllo = ({ className = "w-full h-auto" }) => (
+  <svg viewBox="0 0 800 200" className={className} role="img" aria-label="Growth chart">
+    <rect width="800" height="200" rx="16" fill="#f8fafc" />
+    <polyline points="20,170 120,140 220,150 320,120 420,110 520,90 620,70 780,50" fill="none" stroke="#16a34a" strokeWidth="4" strokeLinecap="round"/>
+    <circle cx="780" cy="50" r="8" fill="#16a34a" />
+  </svg>
+);
+
+// ---------------------- Mock Data ----------------------
+const features = [
+  {
+    title: "Marketing Automation",
+    desc: "Launch campaigns, publish content, and nurture leads without lifting a finger.",
+  },
+  {
+    title: "Lead Generation",
+    desc: "AI agents reply instantly, qualify prospects, and book appointments 24/7.",
+  },
+  {
+    title: "Customer Support",
+    desc: "Answer FAQs, route tickets, and delight customers with always-on service.",
+  },
+  {
+    title: "Admin Automation",
+    desc: "Invoices, reminders, notes, and updates – handled by AI so you can focus on growth.",
+  },
+];
+
+const faqs = [
+  {
+    q: "Will AI replace my staff?",
+    a: "No. It removes repetitive tasks so your team can focus on high-value work and service delivery.",
+  },
+  {
+    q: "Is my data secure?",
+    a: "Yes. We use industry-standard encryption and strict access controls. You own your data.",
+  },
+  {
+    q: "How fast can we launch?",
+    a: "Most businesses are live in a few days with our guided onboarding.",
+  },
+  {
+    q: "What if I don't have a website or CRM?",
+    a: "No problem. We provide lightweight tools and integrate with popular platforms when you're ready.",
+  },
+];
+
+const testimonials = [
+  {
+    name: "Morgan P.",
+    role: "Owner, Apex Plumbing",
+    quote:
+      "We never miss a lead now. The AI books jobs while we're on-site – our monthly bookings jumped 40%.",
+  },
+  {
+    name: "Jamie R.",
+    role: "Founder, Nimbus HVAC",
+    quote:
+      "Support tickets get resolved faster and customers are happier. It's like adding a 24/7 team member.",
+  },
+  {
+    name: "Priya K.",
+    role: "Ops Lead, StartHub",
+    quote:
+      "Campaigns, follow-ups, and reporting run themselves. We finally have time to build the business.",
+  },
+];
+
+// ---------------------- Sections ----------------------
+const Nav = ({ route, setRoute }) => {
+  const links = [
+    { id: "home", label: "Home" },
+    { id: "features", label: "Features" },
+    { id: "industries", label: "Industries" },
+    { id: "how", label: "How It Works" },
+    { id: "pricing", label: "Pricing" },
+    { id: "faq", label: "FAQ" },
+  ];
+  return (
+    <header className="sticky top-0 z-40 w-full bg-white/80 backdrop-blur border-b border-slate-200">
+      <Container className="flex h-16 items-center justify-between">
+        <button onClick={() => setRoute("home")} className="flex items-center gap-2">
+          <Logo />
+        </button>
+        <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-slate-700">
+          {links.map((l) => (
+            <button
+              key={l.id}
+              onClick={() => setRoute(l.id)}
+              className={`hover:text-emerald-700 transition ${route === l.id ? "text-emerald-700" : ""}`}
+            >
+              {l.label}
+            </button>
+          ))}
+        </nav>
+        <div className="flex items-center gap-3">
+          <SecondaryButton onClick={() => setRoute("pricing")}>View Pricing</SecondaryButton>
+          <PrimaryButton onClick={() => setRoute("contact")}>
+            Book a Demo
+          </PrimaryButton>
+        </div>
+      </Container>
+    </header>
+  );
+};
+
+const Hero = ({ onPrimary }) => (
+  <Section id="hero" className="bg-gradient-to-b from-slate-50 to-white pt-10">
+    <Container>
+      <div className="grid lg:grid-cols-2 items-center gap-10">
+        <div className="space-y-6">
+          <Badge>Trusted AI for Small Business Growth</Badge>
+          <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-900">
+            Automate Your <span className="text-emerald-600">Marketing</span>,
+            <br className="hidden sm:block"/> Leads & Support with AI
+          </h1>
+          <p className="text-lg text-slate-600 max-w-xl">
+            Rorey Ventures deploys AI agents that convert more leads, answer customers 24/7, and
+            take care of busywork – so you can focus on delivering great service.
+          </p>
+          <div className="flex flex-wrap items-center gap-3">
+            <PrimaryButton onClick={onPrimary}>Get Started Free</PrimaryButton>
+            <SecondaryButton onClick={() => window.scrollTo({ top: document.getElementById("features")?.offsetTop - 64, behavior: 'smooth' })}>See Features</SecondaryButton>
+          </div>
+          <div className="flex items-center gap-6 pt-4 text-sm text-slate-500">
+            <div className="flex items-center gap-2"><span className="h-2.5 w-2.5 rounded-full bg-emerald-500"/> 24/7 Agents</div>
+            <div className="flex items-center gap-2"><span className="h-2.5 w-2.5 rounded-full bg-emerald-500"/> Secure & Reliable</div>
+            <div className="flex items-center gap-2"><span className="h-2.5 w-2.5 rounded-full bg-emerald-500"/> Fast Onboarding</div>
+          </div>
+        </div>
+        <div className="">
+          <AINetworkIllo className="w-full" />
+        </div>
+      </div>
+    </Container>
+  </Section>
+);
+
+const Features = () => (
+  <Section id="features" className="bg-white">
+    <Container>
+      <div className="mb-10 flex items-end justify-between">
+        <div>
+          <h2 className="text-3xl font-bold text-slate-900">Everything you need to grow</h2>
+          <p className="text-slate-600 mt-2">AI that captures leads, runs campaigns, and supports customers – automatically.</p>
+        </div>
+      </div>
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {features.map((f) => (
+          <div key={f.title} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow transition">
+            <div className="mb-4 h-10 w-10 rounded-xl bg-emerald-50 flex items-center justify-center">
+              <span className="h-2.5 w-2.5 rounded-full bg-emerald-500"></span>
+            </div>
+            <h3 className="font-semibold text-slate-900">{f.title}</h3>
+            <p className="mt-2 text-sm text-slate-600">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+      <div className="mt-12">
+        <ChartIllo />
+      </div>
+    </Container>
+  </Section>
+);
+
+const Industries = () => (
+  <Section id="industries" className="bg-slate-50">
+    <Container>
+      <div className="text-center max-w-3xl mx-auto">
+        <h2 className="text-3xl font-bold text-slate-900">Built for real businesses</h2>
+        <p className="text-slate-600 mt-2">From startups to trades, AI works behind the scenes to win more jobs.</p>
+      </div>
+      <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <IndustryIcon type="plumbing" className="h-12 w-12"/>
+          <h3 className="mt-4 font-semibold text-slate-900">Plumbing & Home Services</h3>
+          <p className="text-sm text-slate-600 mt-1">Instant follow-up, job booking, and reminders while you're on-site.</p>
+        </div>
+        <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <IndustryIcon type="hvac" className="h-12 w-12"/>
+          <h3 className="mt-4 font-semibold text-slate-900">HVAC & Field Teams</h3>
+          <p className="text-sm text-slate-600 mt-1">AI picks up every inquiry and schedules estimates 24/7.</p>
+        </div>
+        <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <IndustryIcon type="startup" className="h-12 w-12"/>
+          <h3 className="mt-4 font-semibold text-slate-900">Startups & SMBs</h3>
+          <p className="text-sm text-slate-600 mt-1">Campaigns, CRM updates, and support – without adding headcount.</p>
+        </div>
+      </div>
+    </Container>
+  </Section>
+);
+
+const HowItWorks = () => (
+  <Section id="how" className="bg-white">
+    <Container>
+      <div className="grid lg:grid-cols-3 gap-6 items-stretch">
+        {["Inquiry Arrives", "AI Qualifies & Responds", "Job Booked / Task Done"].map((step, i) => (
+          <div key={i} className="rounded-2xl border border-slate-200 p-6 shadow-sm">
+            <div className="flex items-center gap-3">
+              <span className="grid h-10 w-10 place-items-center rounded-xl bg-emerald-50 text-emerald-700 font-bold">{i + 1}</span>
+              <h3 className="font-semibold text-slate-900">{step}</h3>
+            </div>
+            <p className="text-sm text-slate-600 mt-3">
+              {i === 0 && "Web form, call, or message comes in – never slip a lead again."}
+              {i === 1 && "Your AI agent replies instantly, answers questions, and qualifies prospects."}
+              {i === 2 && "Appointments get scheduled, tickets resolved, and updates logged automatically."}
+            </p>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </Section>
+);
+
+const SocialProof = () => (
+  <Section id="social" className="bg-slate-50">
+    <Container>
+      <div className="text-center max-w-3xl mx-auto">
+        <h2 className="text-3xl font-bold text-slate-900">Results our customers love</h2>
+        <p className="text-slate-600 mt-2">Real teams saving hours and winning more work with AI agents.</p>
+      </div>
+      <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {testimonials.map((t) => (
+          <figure key={t.name} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <blockquote className="text-slate-700">“{t.quote}”</blockquote>
+            <figcaption className="mt-4 text-sm font-medium text-slate-900">{t.name} <span className="text-slate-500">· {t.role}</span></figcaption>
+          </figure>
+        ))}
+      </div>
+    </Container>
+  </Section>
+);
+
+const FAQ = () => (
+  <Section id="faq" className="bg-white">
+    <Container>
+      <div className="text-center max-w-3xl mx-auto">
+        <h2 className="text-3xl font-bold text-slate-900">Frequently asked questions</h2>
+        <p className="text-slate-600 mt-2">Straight answers to help you decide faster.</p>
+      </div>
+      <div className="mt-10 grid gap-6 sm:grid-cols-2">
+        {faqs.map((f, idx) => (
+          <div key={idx} className="rounded-2xl border border-slate-200 p-6 shadow-sm">
+            <h3 className="font-semibold text-slate-900">{f.q}</h3>
+            <p className="text-sm text-slate-600 mt-2">{f.a}</p>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </Section>
+);
+
+const Contact = () => (
+  <Section id="contact" className="bg-slate-50">
+    <Container>
+      <div className="grid lg:grid-cols-2 gap-8 items-center">
+        <div>
+          <h2 className="text-3xl font-bold text-slate-900">Book a free demo</h2>
+          <p className="text-slate-600 mt-2">See how AI agents capture more leads and automate your operations within days.</p>
+          <ul className="mt-6 space-y-2 text-slate-700">
+            <li>• No credit card required</li>
+            <li>• Guided onboarding</li>
+            <li>• Cancel anytime</li>
+          </ul>
+        </div>
+        <form onSubmit={(e)=>{e.preventDefault(); alert('Thanks! We\'ll be in touch shortly.')}} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <div className="grid grid-cols-1 gap-4">
+            <label className="text-sm text-slate-700">Name<input required className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-600"/></label>
+            <label className="text-sm text-slate-700">Email<input type="email" required className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-600"/></label>
+            <label className="text-sm text-slate-700">Company<input className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-600"/></label>
+            <label className="text-sm text-slate-700">How can we help?<textarea rows={4} className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-600"/></label>
+            <PrimaryButton>Request Demo</PrimaryButton>
+          </div>
+        </form>
+      </div>
+    </Container>
+  </Section>
+);
+
+// ---------------------- Pricing Page ----------------------
+const PricingPage = ({ setRoute }) => {
+  const plans = useMemo(() => ([
+    {
+      name: "Starter",
+      price: "$49",
+      period: "/mo",
+      highlight: "Best for solo operators",
+      features: [
+        "200 AI conversations/mo",
+        "Lead form + inbox",
+        "Basic workflows",
+        "Email support",
+      ],
+      cta: "Start Free",
+    },
+    {
+      name: "Growth",
+      price: "$149",
+      period: "/mo",
+      highlight: "Most popular",
+      features: [
+        "2,000 AI conversations/mo",
+        "Multichannel (web, SMS)",
+        "Bookings & reminders",
+        "CRM sync",
+        "Priority support",
+      ],
+      featured: true,
+      cta: "Start 14‑Day Trial",
+    },
+    {
+      name: "Scale",
+      price: "$399",
+      period: "/mo",
+      highlight: "For busy teams",
+      features: [
+        "10,000 AI conversations/mo",
+        "Custom agents & voice",
+        "Advanced automations",
+        "SLAs + SSO",
+        "Dedicated success mgr",
+      ],
+      cta: "Talk to Sales",
+    },
+  ]), []);
+
+  return (
+    <main className="bg-white">
+      <Section id="pricing-hero" className="bg-gradient-to-b from-slate-50 to-white">
+        <Container>
+          <div className="text-center max-w-3xl mx-auto">
+            <Badge>Simple pricing. Serious results.</Badge>
+            <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-slate-900">Pricing that scales with you</h1>
+            <p className="mt-3 text-lg text-slate-600">Choose a plan that fits your workload today and upgrade as you grow.</p>
+            <div className="mt-6">
+              <SecondaryButton onClick={() => setRoute("home")}>Back to Home</SecondaryButton>
+            </div>
+          </div>
+        </Container>
+      </Section>
+
+      <Section>
+        <Container>
+          <div className="grid gap-6 md:grid-cols-3">
+            {plans.map((p) => (
+              <div key={p.name} className={`flex flex-col rounded-2xl border ${p.featured ? "border-emerald-400" : "border-slate-200"} bg-white p-6 shadow-sm` }>
+                <div className="flex items-baseline justify-between">
+                  <h3 className="text-xl font-bold text-slate-900">{p.name}</h3>
+                  {p.featured && <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2 py-1 rounded-full">Most Popular</span>}
+                </div>
+                <p className="mt-1 text-sm text-slate-600">{p.highlight}</p>
+                <div className="mt-4 flex items-end gap-1">
+                  <span className="text-4xl font-extrabold text-slate-900">{p.price}</span>
+                  <span className="text-slate-500">{p.period}</span>
+                </div>
+                <ul className="mt-6 space-y-2 text-sm text-slate-700">
+                  {p.features.map((f, idx) => (
+                    <li key={idx} className="flex items-start gap-2"><span className="mt-1 h-2.5 w-2.5 rounded-full bg-emerald-500"/>{f}</li>
+                  ))}
+                </ul>
+                <div className="mt-6">
+                  <PrimaryButton onClick={() => alert(`${p.cta} – we\'ll follow up!`)}>{p.cta}</PrimaryButton>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-12 rounded-2xl border border-slate-200 p-6 bg-slate-50">
+            <h4 className="text-lg font-semibold text-slate-900">Need something custom?</h4>
+            <p className="text-slate-600 mt-1">We offer volume discounts, bespoke agents, and priority SLAs for teams with advanced needs.</p>
+            <div className="mt-3"><SecondaryButton onClick={() => alert('We\'ll reach out about custom pricing!')}>Contact Sales</SecondaryButton></div>
+          </div>
+        </Container>
+      </Section>
+
+      <Section id="pricing-faq" className="bg-slate-50">
+        <Container>
+          <div className="text-center max-w-3xl mx-auto">
+            <h2 className="text-3xl font-bold text-slate-900">Pricing FAQs</h2>
+            <p className="text-slate-600 mt-2">Transparent terms, no surprises.</p>
+          </div>
+          <div className="mt-10 grid gap-6 sm:grid-cols-2">
+            {[{
+              q: 'What counts as a conversation?',
+              a: 'A conversation is a session of messages between your customer and an AI agent across supported channels.'
+            },{
+              q: 'Can I cancel anytime?',
+              a: 'Yes. Cancel or change plans at any time from your dashboard.'
+            },{
+              q: 'Do you offer annual billing?',
+              a: 'Absolutely. Save 20% with annual plans.'
+            },{
+              q: 'Non-profits or education discounts?',
+              a: 'Yes, contact sales and we\'ll set you up with a special rate.'
+            }].map((f, i) => (
+              <div key={i} className="rounded-2xl border border-slate-200 p-6 bg-white shadow-sm">
+                <h3 className="font-semibold text-slate-900">{f.q}</h3>
+                <p className="text-sm text-slate-600 mt-2">{f.a}</p>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </Section>
+    </main>
+  );
+};
+
+// ---------------------- Home Page Composition ----------------------
+const HomePage = ({ setRoute }) => (
+  <main className="bg-white">
+    <Hero onPrimary={() => setRoute("contact")} />
+    <Features />
+    <Industries />
+    <HowItWorks />
+    <SocialProof />
+    <FAQ />
+    <Contact />
+  </main>
+);
+
+const Footer = ({ setRoute }) => (
+  <footer className="border-t border-slate-200 bg-white">
+    <Container className="py-10">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 text-sm">
+        <div>
+          <Logo />
+          <p className="mt-3 text-slate-600">AI agents that help small businesses grow with less effort.</p>
+        </div>
+        <div>
+          <h4 className="font-semibold text-slate-900">Product</h4>
+          <ul className="mt-2 space-y-2 text-slate-600">
+            <li><button onClick={()=>window.scrollTo({ top: 0, behavior: 'smooth' })} className="hover:text-emerald-700">Overview</button></li>
+            <li><button onClick={()=>document.getElementById('features')?.scrollIntoView({behavior:'smooth'})} className="hover:text-emerald-700">Features</button></li>
+            <li><button onClick={()=>setRoute('pricing')} className="hover:text-emerald-700">Pricing</button></li>
+          </ul>
+        </div>
+        <div>
+          <h4 className="font-semibold text-slate-900">Company</h4>
+          <ul className="mt-2 space-y-2 text-slate-600">
+            <li><button onClick={()=>document.getElementById('contact')?.scrollIntoView({behavior:'smooth'})} className="hover:text-emerald-700">Contact</button></li>
+            <li><a className="hover:text-emerald-700" href="#">Privacy</a></li>
+            <li><a className="hover:text-emerald-700" href="#">Terms</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 className="font-semibold text-slate-900">Get started</h4>
+          <p className="mt-2 text-slate-600">Start free and see value in days, not months.</p>
+          <div className="mt-3"><PrimaryButton onClick={()=>alert('Onboarding flow…')}>Get Started</PrimaryButton></div>
+        </div>
+      </div>
+      <div className="mt-10 text-xs text-slate-500">© {new Date().getFullYear()} Rorey Ventures. All rights reserved.</div>
+    </Container>
+  </footer>
+);
+
+// ---------------------- App (Router) ----------------------
+export default function App() {
+  const [route, setRoute] = useState("home");
+
+  return (
+    <div className="min-h-screen bg-white text-slate-900">
+      <Nav route={route} setRoute={setRoute} />
+      {route === "home" && <HomePage setRoute={setRoute} />}
+      {route === "pricing" && <PricingPage setRoute={setRoute} />}
+      {route === "features" && (
+        <main><Features /><FAQ /><Footer setRoute={setRoute} /></main>
+      )}
+      {route === "industries" && (
+        <main><Industries /><FAQ /><Footer setRoute={setRoute} /></main>
+      )}
+      {route === "how" && (
+        <main><HowItWorks /><FAQ /><Footer setRoute={setRoute} /></main>
+      )}
+      {route === "faq" && (
+        <main><FAQ /><Contact /><Footer setRoute={setRoute} /></main>
+      )}
+      {route === "contact" && (
+        <main><Contact /><Footer setRoute={setRoute} /></main>
+      )}
+      {!(route === "features" || route === "industries" || route === "how" || route === "faq" || route === "contact") && <Footer setRoute={setRoute} />}
+    </div>
+  );
+}
